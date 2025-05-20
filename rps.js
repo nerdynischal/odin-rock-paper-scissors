@@ -44,30 +44,43 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
+function checkWinnner() {
+  if (humanScore == 5) {
+    return "Congratulations, You have won!";
+  } else if (computerScore == 5) {
+    return "Game Over! You have lost!";
+  }
+}
+
+function isGameOver() {
+  if (humanScore == 5 || computerScore == 5) {
+    return true;
+  }
+}
+
 const buttons = document.querySelectorAll("button");
+const resultHTML = document.querySelector(".js-result");
+const movesHTML = document.querySelector(".js-moves");
+const scoresHTML = document.querySelector(".js-scores");
+
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const humanChoice = button.id;
     const computerChoice = getComputerChoice();
-
     const result = playRound(humanChoice, computerChoice);
-    document.querySelector(".js-result").textContent = result;
 
-    document.querySelector(
-      ".js-moves"
-    ).textContent = `You played ${humanChoice} and the computer played ${computerChoice}`;
-    document.querySelector(
-      ".js-scores"
-    ).textContent = `Player's Score: ${humanScore} Computer Score: ${computerScore}`;
+    resultHTML.textContent = result;
+    movesHTML.textContent = `You played ${humanChoice} and the computer played ${computerChoice}`;
+    scoresHTML.textContent = `Player's Score: ${humanScore} Computer Score: ${computerScore}`;
+
+    if (isGameOver()) {
+      const winner = checkWinnner();
+      resultHTML.textContent = winner;
+      movesHTML.textContent = "";
+      scoresHTML.textContent = `Final Scores - Player's Score: ${humanScore} Computer Score: ${computerScore}`;
+      buttons.forEach((button) => {
+        button.disabled = true;
+      });
+    }
   });
 });
-
-// function playGame() {
-//   for (let i = 0; i < 5; i++) {
-//     playRound(getHumanChoice(), getComputerChoice());
-//   }
-//   console.log("Your score: " + humanScore);
-//   console.log("Computer score: " + computerScore);
-// }
-
-// playGame();
