@@ -6,6 +6,7 @@ Rock Paper Scissors exercise from the Odin project using HTML, CSS & JavaScript.
 
 ## Acknowledgments
 
+- [Reset CSS](https://piccalil.li/blog/a-more-modern-css-reset/)
 - [awesome-readme](https://github.com/matiassingers/awesome-readme)
 - [Handz](https://www.handz.design/)
 - [Green tracksuit illustration by Vadim Bogulov](https://unsplash.com/photos/a-doll-with-a-green-suit-and-white-shirt-krgb_3HIkME)
