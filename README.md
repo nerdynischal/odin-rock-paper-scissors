@@ -4,6 +4,8 @@ Rock Paper Scissors exercise from the Odin project using HTML, CSS & JavaScript.
 
 [Live preview](https://nerdynischal.github.io/odin-rock-paper-scissors/)
 
+![](./images/screenshot.png)
+
 ## Acknowledgments
 
 - [Reset CSS](https://piccalil.li/blog/a-more-modern-css-reset/)
