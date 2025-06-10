@@ -13,19 +13,42 @@ function getComputerChoice() {
   }
 }
 
-//Get player move
-function getHumanChoice() {
-  const humanMove = prompt("Whats your move?");
-  return humanMove.toLowerCase();
+const displayHumanChoiceHTML = document.querySelector(".human-choice");
+const displayComputerChoiceHTML = document.querySelector(".computer-choice");
+const playedMovesContainer = document.querySelectorAll(
+  ".played-moves-container"
+);
+
+//function to set display images for moves played
+function displayPlayedMove(humanChoice, computerChoice) {
+  displayHumanChoiceHTML.src = `images/${humanChoice}.png`;
+  displayComputerChoiceHTML.src = `images/${computerChoice}.png`;
+}
+
+const humanMovesContainer = playedMovesContainer[0];
+const computerMovesContainer = playedMovesContainer[1];
+
+function updateWinnerMoveDisplay(player) {
+  player.style.borderColor = "green";
+  player.style.transform = "scale(1.2)";
+}
+
+function updateLoserMoveDisplay(player) {
+  player.style.borderColor = "red";
+  player.style.transform = "scale(1)";
+}
+
+function resetDisplay(player) {
+  player.style.borderColor = "grey";
+  player.style.transform = "scale(1)";
 }
 
 //Play a single round
 function playRound(humanChoice, computerChoice) {
-  console.log(
-    `You played ${humanChoice} and the computer played ${computerChoice}`
-  );
-
+  displayPlayedMove(humanChoice, computerChoice);
   if (humanChoice === computerChoice) {
+    resetDisplay(humanMovesContainer);
+    resetDisplay(computerMovesContainer);
     return "It's a tie";
   } else if (
     (humanChoice === "rock" && computerChoice === "paper") ||
@@ -33,22 +56,26 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "scissors" && computerChoice === "rock")
   ) {
     computerScore++;
-    return `You lose! ${computerChoice} beats ${humanChoice}`;
+    updateWinnerMoveDisplay(computerMovesContainer);
+    updateLoserMoveDisplay(humanMovesContainer);
+    return `You lose!`;
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     humanScore++;
-    return `You Win! ${humanChoice} beats ${computerChoice}`;
+    updateWinnerMoveDisplay(humanMovesContainer);
+    updateLoserMoveDisplay(computerMovesContainer);
+    return `You Win!`;
   }
 }
 
 function checkWinnner() {
   if (humanScore == 5) {
-    return "Congratulations, You have won!";
+    return "Congratulations, You won!";
   } else if (computerScore == 5) {
-    return "Game Over! You have lost!";
+    return "Game Over! You lost!";
   }
 }
 
@@ -59,9 +86,11 @@ function isGameOver() {
 }
 
 const buttons = document.querySelectorAll("button");
+const textDisplayHTML = document.querySelector(".text-display");
 const resultHTML = document.querySelector(".js-result");
-const movesHTML = document.querySelector(".js-moves");
-const scoresHTML = document.querySelector(".js-scores");
+
+const playerScoreHTML = document.querySelector(".js-player-score");
+const computerScoreHTML = document.querySelector(".js-computer-score");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -69,15 +98,14 @@ buttons.forEach((button) => {
     const computerChoice = getComputerChoice();
     const result = playRound(humanChoice, computerChoice);
 
+    textDisplayHTML.style.display = "initial";
     resultHTML.textContent = result;
-    movesHTML.textContent = `You played ${humanChoice} and the computer played ${computerChoice}`;
-    scoresHTML.textContent = `Player's Score: ${humanScore} Computer Score: ${computerScore}`;
+    playerScoreHTML.textContent = humanScore;
+    computerScoreHTML.textContent = computerScore;
 
     if (isGameOver()) {
       const winner = checkWinnner();
       resultHTML.textContent = winner;
-      movesHTML.textContent = "";
-      scoresHTML.textContent = `Final Scores - Player's Score: ${humanScore} Computer Score: ${computerScore}`;
       buttons.forEach((button) => {
         button.disabled = true;
       });

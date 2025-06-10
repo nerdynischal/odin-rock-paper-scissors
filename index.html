@@ -4,16 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin | Rock Paper Scissors</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Rock Paper Scissors</h1>
-    <div class="js-moves"></div>
-    <div class="js-result"></div>
-    <div class="js-scores"></div>
+    <main>
+      <section class="content">
+        <div>
+          <h1>Rock Paper Scissors</h1>
+          <p>First to five wins.</p>
+        </div>
 
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+        <div class="scores-count">
+          <!--Player column-->
+          <div class="player">
+            <div class="profile-img-container">
+              <img
+                src="images/user.jpg"
+                alt="A person wearing green tracksuit"
+              />
+              <div class="played-moves-container">
+                <img src="" alt="" class="human-choice" />
+              </div>
+            </div>
+
+            <h2>Player</h2>
+            <div class="js-player-score score">0</div>
+          </div>
+
+          <!--Computer section-->
+          <div class="computer">
+            <div class="profile-img-container">
+              <img src="images/bot.jpg" alt="A person wearing red tracksuit" />
+              <div class="played-moves-container">
+                <img src="" alt="" class="computer-choice" />
+              </div>
+            </div>
+            <h2>Opponent</h2>
+            <div class="js-computer-score score">0</div>
+          </div>
+        </div>
+
+        <!--Results display-->
+        <div class="text-display">
+          <div class="js-result"></div>
+        </div>
+
+        <div class="buttons-container">
+          <button id="rock">
+            <div class="moves-pic-container">
+              <img src="images/rock.png" alt="A hand signaling rock" />
+            </div>
+          </button>
+
+          <button id="paper">
+            <div class="moves-pic-container">
+              <img src="images/paper.png" alt="A hand signaling paper" />
+            </div>
+          </button>
+
+          <button id="scissors">
+            <div class="moves-pic-container">
+              <img src="images/scissors.png" alt="A hand signaling scissors" />
+            </div>
+          </button>
+        </div>
+      </section>
+    </main>
 
     <script src="rps.js"></script>
   </body>
